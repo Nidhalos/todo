@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Todo List</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Todo List</h1>
+    <a href="/todos/new" class="add-todo-link">Add New Todo</a>
+    
+    <ul class="todo-list">
+      <% todos.forEach(todo => { %>
+        <li class="todo-item">
+          <div class="todo-content">
+            <span class="todo-title"><%= todo.title %></span>
+            <span class="todo-status <%= todo.completed === 1 ? 'status-done' : 'status-pending' %>">
+              <%= todo.completed === 1 ? ' Done' : ' Processing' %>
+            </span>
+          </div>
+          <div class="todo-actions">
+            <a href="/todos/<%= todo.id %>/edit" class="btn btn-edit">Edit</a>
+        <form action="/todos/<%= todo.id %>?_method=DELETE" method="POST" onsubmit="return confirmDelete()">
+  <button type="submit" class="btn btn-danger">Delete</button>
+</form>
+
+<script>
+  function confirmDelete() {
+    return confirm('Are you sure you want to delete this todo?');
+  }
+</script>
+            </form>
+          </div>
+        </li>
+      <% }); %>
+    </ul>
+  </div>
+</body>
+</html>
